@@ -1,0 +1,54 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configuration (may contain sensitive data)
+config.properties
+*.properties.local
+
+# Build outputs
+*.jar
+*.war
+*.ear
+*.class
+
+# Test outputs
+*.test
+*.coverage
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
