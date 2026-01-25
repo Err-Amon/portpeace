@@ -231,7 +231,7 @@ alias ppf='portpeace free'
 alias ppl='portpeace list'
 ```
 
-## 🔧 Configuration
+## Configuration
 
 Configuration is stored in `~/.portpeace/config.properties`:
 
