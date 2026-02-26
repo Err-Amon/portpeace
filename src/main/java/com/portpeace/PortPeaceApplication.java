@@ -15,7 +15,6 @@ public class PortPeaceApplication {
     public static void main(String[] args) {
         try {
             // Initialize database
-            logger.info("Initializing PortPeace...");
             DatabaseConfig.initialize();
 
             // Test database connection

@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.LoggerContext;
 
 import java.io.*;
 import java.sql.Connection;
@@ -22,6 +23,18 @@ public class DatabaseConfig {
     private static final String DEFAULT_DATABASE = "portpeace";
     private static final String DEFAULT_USERNAME = "portpeace";
     private static final String DEFAULT_PASSWORD = "Portpeace##1";
+
+    static {
+        // Suppress debug logs from third-party libraries
+        suppressDebugLogs();
+    }
+
+    private static void suppressDebugLogs() {
+        LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+        context.getLogger("com.zaxxer.hikari").setLevel(ch.qos.logback.classic.Level.WARN);
+        context.getLogger("com.zaxxer").setLevel(ch.qos.logback.classic.Level.WARN);
+        context.getLogger("com.mysql.cj").setLevel(ch.qos.logback.classic.Level.WARN);
+    }
 
 
     public static void initialize() throws SQLException {
@@ -54,7 +67,6 @@ public class DatabaseConfig {
         try {
             dataSource = new HikariDataSource(config);
             initializeSchema();
-            logger.info("Database connection pool initialized successfully");
         } catch (Exception e) {
             logger.error("Failed to initialize database connection pool", e);
             throw new SQLException("Database initialization failed: " + e.getMessage(), e);
@@ -121,7 +133,6 @@ public class DatabaseConfig {
             stmt.execute(createPortAllocationsTable);
             stmt.execute(createPortHistoryTable);
             stmt.execute(createPreferencesTable);
-            logger.info("Database schema initialized successfully");
         }
     }
 
@@ -133,7 +144,6 @@ public class DatabaseConfig {
         if (configFile.exists()) {
             try (InputStream input = new FileInputStream(configFile)) {
                 props.load(input);
-                logger.info("Configuration loaded from {}", CONFIG_FILE);
             } catch (IOException e) {
                 logger.warn("Failed to load configuration file, using defaults", e);
             }
@@ -161,7 +171,6 @@ public class DatabaseConfig {
 
         try (OutputStream output = new FileOutputStream(CONFIG_FILE)) {
             props.store(output, "PortPeace Configuration");
-            logger.info("Default configuration created at {}", CONFIG_FILE);
         } catch (IOException e) {
             logger.error("Failed to create default configuration", e);
         }
@@ -171,7 +180,6 @@ public class DatabaseConfig {
     public static void close() {
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
-            logger.info("Database connection pool closed");
         }
     }
 

@@ -1,5 +1,10 @@
 # PortPeace - Complete Developer Guide
 
+> **Note:** If you rebuild the project with `mvn package`, be sure to update the installed
+> binary (`/usr/local/bin/portpeace.jar`) or re-run the installation steps. Otherwise the
+> old jar (with verbose logging) will continue to be invoked by the `portpeace` command.
+
+
 ## 📚 Table of Contents
 
 1. [What is PortPeace?](#what-is-portpeace)
@@ -59,6 +64,10 @@ PortPeace remembers your allocations, prevents conflicts, and works across your 
 | MySQL      | 8.0+    | `mysql --version` |
 
 ### Quick Install
+
+*After building or making configuration changes you may need to reinstall the
+executable jar as described below.*
+
 
 ```bash
 # 1. Setup database
