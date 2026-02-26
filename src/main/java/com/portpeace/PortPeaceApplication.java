@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-/**
- * Main application entry point for PortPeace
- */
+
 public class PortPeaceApplication {
     private static final Logger logger = LoggerFactory.getLogger(PortPeaceApplication.class);
 

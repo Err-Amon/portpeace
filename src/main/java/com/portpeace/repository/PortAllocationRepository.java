@@ -15,9 +15,6 @@ import java.util.Optional;
 public class PortAllocationRepository {
     private static final Logger logger = LoggerFactory.getLogger(PortAllocationRepository.class);
 
-    /**
-     * Save a new port allocation
-     */
     public boolean save(PortAllocation allocation) {
         String sql =
     "INSERT INTO port_allocations " +
@@ -71,9 +68,7 @@ public class PortAllocationRepository {
         return Optional.empty();
     }
 
-    /**
-     * Find allocation by port number
-     */
+    
     public Optional<PortAllocation> findByPortNumber(int portNumber) {
         String sql = "SELECT * FROM port_allocations WHERE port_number = ? AND status = 'ACTIVE'";
 
@@ -94,9 +89,6 @@ public class PortAllocationRepository {
         return Optional.empty();
     }
 
-    /**
-     * Get all active allocations
-     */
     public List<PortAllocation> findAll() {
         List<PortAllocation> allocations = new ArrayList<>();
         String sql = "SELECT * FROM port_allocations ORDER BY port_number";
@@ -116,9 +108,7 @@ public class PortAllocationRepository {
         return allocations;
     }
 
-    /**
-     * Get allocations by status
-     */
+  
     public List<PortAllocation> findByStatus(PortAllocation.Status status) {
         List<PortAllocation> allocations = new ArrayList<>();
         String sql = "SELECT * FROM port_allocations WHERE status = ? ORDER BY port_number";
@@ -162,9 +152,7 @@ public class PortAllocationRepository {
         return false;
     }
 
-    /**
-     * Update allocation status
-     */
+    
     public boolean updateStatus(String serviceName, PortAllocation.Status status) {
         String sql = "UPDATE port_allocations SET status = ?, last_used_at = CURRENT_TIMESTAMP WHERE service_name = ?";
 
@@ -187,9 +175,7 @@ public class PortAllocationRepository {
         return false;
     }
 
-    /**
-     * Clean up inactive allocations older than specified days
-     */
+   
     public int cleanupInactive(int daysOld) {
         String sql = "DELETE FROM port_allocations WHERE status = 'INACTIVE' AND last_used_at < DATE_SUB(NOW(), INTERVAL ? DAY)";
 
@@ -211,9 +197,7 @@ public class PortAllocationRepository {
         }
     }
 
-    /**
-     * Log history entry
-     */
+    
     public void logHistory(String serviceName, int portNumber, String username, 
                           String hostname, String action, String details) {
         String sql =
@@ -238,9 +222,7 @@ public class PortAllocationRepository {
         }
     }
 
-    /**
-     * Map ResultSet to PortAllocation object
-     */
+    
     private PortAllocation mapResultSetToAllocation(ResultSet rs) throws SQLException {
         PortAllocation allocation = new PortAllocation();
         allocation.setId(rs.getInt("id"));
