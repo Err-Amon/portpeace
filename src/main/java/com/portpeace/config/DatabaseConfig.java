@@ -11,9 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-/**
- * Database configuration and connection management using HikariCP
- */
 public class DatabaseConfig {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseConfig.class);
     private static final String CONFIG_FILE = System.getProperty("user.home") + "/.portpeace/config.properties";
@@ -26,9 +23,7 @@ public class DatabaseConfig {
     private static final String DEFAULT_USERNAME = "portpeace";
     private static final String DEFAULT_PASSWORD = "Portpeace##1";
 
-    /**
-     * Initialize the database connection pool
-     */
+
     public static void initialize() throws SQLException {
         if (dataSource != null && !dataSource.isClosed()) {
             return;
@@ -66,9 +61,7 @@ public class DatabaseConfig {
         }
     }
 
-    /**
-     * Get a connection from the pool
-     */
+    
     public static Connection getConnection() throws SQLException {
         if (dataSource == null || dataSource.isClosed()) {
             initialize();
@@ -76,9 +69,7 @@ public class DatabaseConfig {
         return dataSource.getConnection();
     }
 
-    /**
-     * Initialize database schema
-     */
+
     private static void initializeSchema() throws SQLException {
         String createPortAllocationsTable =
     "CREATE TABLE IF NOT EXISTS port_allocations (" +
@@ -134,9 +125,7 @@ public class DatabaseConfig {
         }
     }
 
-    /**
-     * Load configuration from file
-     */
+  
     private static Properties loadConfiguration() {
         Properties props = new Properties();
         File configFile = new File(CONFIG_FILE);
@@ -156,9 +145,7 @@ public class DatabaseConfig {
         return props;
     }
 
-    /**
-     * Create default configuration file
-     */
+  
     private static void createDefaultConfiguration() {
         File configDir = new File(System.getProperty("user.home") + "/.portpeace");
         if (!configDir.exists()) {
@@ -180,9 +167,7 @@ public class DatabaseConfig {
         }
     }
 
-    /**
-     * Close the connection pool
-     */
+   
     public static void close() {
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
@@ -190,9 +175,7 @@ public class DatabaseConfig {
         }
     }
 
-    /**
-     * Check if database is accessible
-     */
+    
     public static boolean testConnection() {
         try (Connection conn = getConnection()) {
             return conn.isValid(5);

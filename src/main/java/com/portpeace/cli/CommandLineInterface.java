@@ -10,9 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Command line interface handler
- */
+
 public class CommandLineInterface {
     private static final Logger logger = LoggerFactory.getLogger(CommandLineInterface.class);
     private final PortManagementService service;
@@ -22,9 +20,7 @@ public class CommandLineInterface {
         this.service = service;
     }
 
-    /**
-     * Process command line arguments
-     */
+   
     public void processCommand(String[] args) {
         if (args.length == 0) {
             printUsage();
@@ -76,9 +72,7 @@ public class CommandLineInterface {
         }
     }
 
-    /**
-     * Handle port allocation command
-     */
+    
     private void handleAllocate(String[] args) {
         if (args.length < 2) {
             System.err.println("Error: Service name is required");
@@ -129,9 +123,6 @@ public class CommandLineInterface {
         }
     }
 
-    /**
-     * Handle port free command
-     */
     private void handleFree(String[] args) {
         if (args.length < 2) {
             System.err.println("Error: Service name is required");
@@ -148,9 +139,7 @@ public class CommandLineInterface {
         }
     }
 
-    /**
-     * Handle list command
-     */
+   
     private void handleList(String[] args) {
         List<PortAllocation> allocations = service.listAllocations();
 
@@ -182,9 +171,6 @@ public class CommandLineInterface {
         System.out.println("Total: " + allocations.size() + " allocation(s)");
     }
 
-    /**
-     * Handle status command
-     */
     private void handleStatus(String[] args) {
         if (args.length < 2) {
             // Show system status
@@ -202,9 +188,7 @@ public class CommandLineInterface {
         }
     }
 
-    /**
-     * Show system status
-     */
+   
     private void showSystemStatus() {
         System.out.println("PortPeace System Status");
         System.out.println("═══════════════════════════════════════════════════════════════════════");
@@ -220,9 +204,7 @@ public class CommandLineInterface {
         System.out.println("═══════════════════════════════════════════════════════════════════════");
     }
 
-    /**
-     * Show port status
-     */
+  
     private void showPortStatus(int port) {
         PortManagementService.PortStatus status = service.checkPortStatus(port);
         
@@ -243,9 +225,6 @@ public class CommandLineInterface {
         System.out.println("═══════════════════════════════════════════════════════════════════════");
     }
 
-    /**
-     * Show service status
-     */
     private void showServiceStatus(String serviceName) {
         Optional<PortAllocation> allocation = service.getServiceAllocation(serviceName);
         
@@ -272,9 +251,7 @@ public class CommandLineInterface {
         System.out.println("═══════════════════════════════════════════════════════════════════════");
     }
 
-    /**
-     * Handle cleanup command
-     */
+    
     private void handleCleanup(String[] args) {
         int daysOld = 7; // Default cleanup age
         
@@ -291,9 +268,7 @@ public class CommandLineInterface {
         System.out.println("✓ Cleaned up " + cleaned + " inactive allocation(s) older than " + daysOld + " days");
     }
 
-    /**
-     * Print usage information
-     */
+    
     private void printUsage() {
         System.out.println("PortPeace - Professional Port Management Tool");
         System.out.println();
@@ -319,18 +294,14 @@ public class CommandLineInterface {
         System.out.println("  portpeace status 3000");
     }
 
-    /**
-     * Print version information
-     */
+    
     private void printVersion() {
         System.out.println("PortPeace v1.0.0");
         System.out.println("Professional Port Management Tool");
         System.out.println("Copyright (c) 2025");
     }
 
-    /**
-     * Truncate string to max length
-     */
+  
     private String truncate(String str, int maxLength) {
         if (str == null) return "";
         return str.length() > maxLength ? str.substring(0, maxLength - 3) + "..." : str;

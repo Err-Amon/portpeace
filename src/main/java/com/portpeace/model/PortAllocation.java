@@ -2,9 +2,7 @@ package com.portpeace.model;
 
 import java.time.LocalDateTime;
 
-/**
- * Port allocation data model
- */
+
 public class PortAllocation {
     
     public enum Status {

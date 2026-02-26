@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Service layer for port management operations
- */
+
 public class PortManagementService {
     private static final Logger logger = LoggerFactory.getLogger(PortManagementService.class);
     
@@ -26,9 +24,6 @@ public class PortManagementService {
         this.portScanner = new PortScanner();
     }
 
-    /**
-     * Allocate a port for a service
-     */
     public AllocationResult allocatePort(String serviceName, Integer preferredPort, String description) {
         String username = SystemUtils.getUsername();
         String hostname = SystemUtils.getHostname();
@@ -91,9 +86,7 @@ public class PortManagementService {
         }
     }
 
-    /**
-     * Free a port allocation
-     */
+   
     public boolean freePort(String serviceName) {
         Optional<PortAllocation> existing = repository.findByServiceName(serviceName);
         
@@ -116,30 +109,22 @@ public class PortManagementService {
         return false;
     }
 
-    /**
-     * Get all allocations
-     */
+   
     public List<PortAllocation> listAllocations() {
         return repository.findAll();
     }
 
-    /**
-     * Get active allocations
-     */
+ 
     public List<PortAllocation> listActiveAllocations() {
         return repository.findByStatus(PortAllocation.Status.ACTIVE);
     }
 
-    /**
-     * Get allocation by service name
-     */
+   
     public Optional<PortAllocation> getServiceAllocation(String serviceName) {
         return repository.findByServiceName(serviceName);
     }
 
-    /**
-     * Check port status
-     */
+    
     public PortStatus checkPortStatus(int port) {
         boolean inUse = portScanner.isPortInUse(port);
         Optional<PortAllocation> allocation = repository.findByPortNumber(port);
@@ -147,16 +132,12 @@ public class PortManagementService {
         return new PortStatus(port, inUse, allocation.orElse(null));
     }
 
-    /**
-     * Auto-cleanup inactive allocations
-     */
+  
     public int cleanupInactiveAllocations(int daysOld) {
         return repository.cleanupInactive(daysOld);
     }
 
-    /**
-     * Find available port in range
-     */
+    
     private Optional<Integer> findAvailablePort(int start, int end) {
         for (int port = start; port <= end; port++) {
             if (!portScanner.isPortInUse(port) && repository.findByPortNumber(port).isEmpty()) {
@@ -166,9 +147,7 @@ public class PortManagementService {
         return Optional.empty();
     }
 
-    /**
-     * Allocation result wrapper
-     */
+   
     public static class AllocationResult {
         private final boolean success;
         private final PortAllocation allocation;
@@ -201,9 +180,7 @@ public class PortManagementService {
         }
     }
 
-    /**
-     * Port status wrapper
-     */
+    
     public static class PortStatus {
         private final int port;
         private final boolean inUse;
