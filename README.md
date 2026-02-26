@@ -1,20 +1,20 @@
 # PortPeace - Professional Port Management Tool
 
-## 📋 Overview
+## Overview
 
 PortPeace is a professional-grade port management tool designed to eliminate port conflicts in local development environments. It provides intelligent port allocation, conflict prevention, and team-aware port management using Java and MySQL.
 
 ### Key Features
 
-- ✅ **Smart Port Allocation** - Automatically finds and reserves available ports
-- ✅ **Conflict Prevention** - Prevents port conflicts before they happen
-- ✅ **Persistence** - Remembers your allocations across sessions
-- ✅ **Team Awareness** - Track port usage across team members
-- ✅ **Auto-cleanup** - Automatically removes stale allocations
-- ✅ **Rich CLI** - Beautiful command-line interface
-- ✅ **Logging** - Comprehensive audit trail of all operations
+- **Smart Port Allocation** - Automatically finds and reserves available ports
+- **Conflict Prevention** - Prevents port conflicts before they happen
+- **Persistence** - Remembers your allocations across sessions
+- **Team Awareness** - Track port usage across team members
+- **Auto-cleanup** - Automatically removes stale allocations
+- **Rich CLI** - Beautiful command-line interface
+- **Logging** - Comprehensive audit trail of all operations
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 PortPeace
@@ -25,14 +25,14 @@ PortPeace
 └── Utilities (Port Scanning, System Info)
 ```
 
-## 📦 Prerequisites
+## Prerequisites
 
 - **Java 11 or higher** - Required to run the application
 - **Maven 3.6+** - Required to build the project
 - **MySQL 8.0+** - Required for data storage
 - **Operating System** - Windows, macOS, or Linux
 
-## 🚀 Installation
+## Installation
 
 ### Step 1: Install MySQL
 
@@ -113,7 +113,7 @@ portpeace version
 portpeace help
 ```
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Basic Commands
 
@@ -231,7 +231,7 @@ alias ppf='portpeace free'
 alias ppl='portpeace list'
 ```
 
-## 🔧 Configuration
+## Configuration
 
 Configuration is stored in `~/.portpeace/config.properties`:
 
@@ -246,7 +246,7 @@ db.password=portpeace
 
 Edit this file to customize your database connection.
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 portpeace/
@@ -280,7 +280,7 @@ portpeace/
 └── README.md                                        # This file
 ```
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### port_allocations
 | Column | Type | Description |
@@ -318,7 +318,7 @@ portpeace/
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Last update time |
 
-## 🔍 Troubleshooting
+## Troubleshooting
 
 ### Cannot connect to database
 
@@ -362,7 +362,7 @@ rm -rf ~/.m2/repository/com/portpeace
 mvn package
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -375,7 +375,7 @@ mvn test -Dtest=PortScannerTest
 mvn clean test jacoco:report
 ```
 
-## 📊 Logging
+## Logging
 
 Logs are stored in `~/.portpeace/logs/`:
 
@@ -389,12 +389,12 @@ View logs:
 tail -f ~/.portpeace/logs/portpeace.log
 ```
 
-## 🚦 Exit Codes
+## Exit Codes
 
 - `0` - Success
 - `1` - Error (database connection, invalid arguments, etc.)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -405,24 +405,14 @@ Contributions are welcome! Please follow these steps:
 5. Push to your fork: `git push origin feature-name`
 6. Submit a pull request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - HikariCP for connection pooling
 - SLF4J and Logback for logging
 - MySQL for reliable data storage
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-
-- Open an issue on GitHub
-- Check logs in `~/.portpeace/logs/`
-- Review this documentation
-
----
 
 **Made with ❤️ for developers who are tired of port conflicts**
